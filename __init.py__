@@ -1,0 +1,46 @@
+"""
+Железнодорожная система управления
+Пакет для управления железнодорожным транспортом
+"""
+
+__version__ = "1.0.0"
+__author__ = "Railway Management System"
+__description__ = "Система для управления железнодорожным транспортом"
+
+from .models import *
+from .exceptions import *
+from .services import RailwayService
+from .cli import RailwayCLI
+
+__all__ = [
+    # Модели
+    'RailwayTrack',
+    'Station',
+    'Locomotive',
+    'Wagon',
+    'Train',
+    'ScheduleEntry',
+    'Ticket',
+    'MaintenanceRecord',
+    'SafetyCheck',
+    'Route',
+
+    # Перечисления
+    'TrainStatus',
+    'StationType',
+    'TicketClass',
+    'MaintenanceType',
+    'PaymentStatus',
+    'SafetyCheckStatus',
+
+    # Исключения
+    'RailwayException',
+    'TrainNotFoundError',
+    'StationNotFoundError',
+    'TrackNotFoundError',
+    'TicketNotFoundError',
+
+    # Сервисы
+    'RailwayService',
+    'RailwayCLI',
+]
