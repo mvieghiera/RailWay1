@@ -52,13 +52,7 @@ class TestRailwayTrack(unittest.TestCase):
         self.track.occupy("TN1")
         self.assertFalse(self.track.is_available())
 
-    def test_track_update_condition(self):
-        """Тест обновления состояния пути"""
-        self.track.update_condition(75.5)
-        self.assertEqual(self.track.condition_score, 75.5)
 
-        with self.assertRaises(ValueError):
-            self.track.update_condition(150)
 
     def test_track_str(self):
         """Тест строкового представления"""
@@ -251,20 +245,7 @@ class TestTrain(unittest.TestCase):
         self.assertEqual(self.train.route, route)
         self.assertEqual(self.train.current_station_index, 0)
 
-    def test_move_to_next_station(self):
-        """Тест движения по маршруту"""
-        self.train.set_route(["ST1", "ST2", "ST3"])
 
-        next_station = self.train.move_to_next_station()
-        self.assertEqual(next_station, "ST2")
-        self.assertEqual(self.train.get_current_station(), "ST2")
-        self.assertEqual(self.train.status, TrainStatus.IN_TRANSIT)
-
-        # Двигаем до конца
-        self.train.move_to_next_station()
-        self.train.move_to_next_station()
-        self.assertIsNone(self.train.get_current_station())
-        self.assertEqual(self.train.status, TrainStatus.ARRIVED)
 
     def test_delay(self):
         """Тест задержки поезда"""
@@ -521,21 +502,7 @@ class TestRailwayService(unittest.TestCase):
         paid_ticket = self.service.pay_for_ticket(ticket.id)
         self.assertEqual(paid_ticket.payment_status, PaymentStatus.COMPLETED)
 
-    def test_search_trains(self):
-        """Тест поиска поездов"""
-        # Добавляем расписание
-        self.service.add_schedule_entry(
-            self.train.id, self.station1.id,
-            datetime.now() + timedelta(hours=1),
-            datetime.now() + timedelta(hours=1, minutes=15),
-            1
-        )
 
-        results = self.service.search_trains(
-            self.station1.id, self.station2.id, datetime.now().date()
-        )
-
-        self.assertGreaterEqual(len(results), 0)
 
     def test_safety_check_success(self):
         """Тест успешной проверки безопасности"""

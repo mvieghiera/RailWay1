@@ -3,12 +3,11 @@
 """
 
 import sys
-from typing import List, Optional
+from typing import List
 from datetime import datetime
 from services import RailwayService
 from models import StationType, TicketClass, MaintenanceType, TrainStatus
 from exceptions import *
-
 
 class RailwayCLI:
     """
